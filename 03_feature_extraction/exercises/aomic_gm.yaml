@@ -1,0 +1,33 @@
+workdir: /tmp
+
+datagrabber:
+  kind: PatternDataladDataGrabber
+  uri: https://github.com/OpenNeuroDatasets/ds003097.git
+  patterns:
+    VBM_GM: 
+        pattern: derivatives/fmriprep/sub-{subject}/anat/sub-{subject}_space-MNI152NLin2009cAsym_label-GM_probseg.nii.gz
+        space: MNI152NLin2009cAsym
+  replacements: 
+    - subject
+  types:
+    - VBM_GM
+markers:
+  - name: Schaefer1000x7_Mean
+    kind: ParcelAggregation
+    parcellation: Schaefer1000x7
+    method: mean
+  - name: Schaefer1000x7_Std
+    kind: ParcelAggregation
+    parcellation: Schaefer1000x7
+    method: std
+  - name: Schaefer100x7_Mean
+    kind: ParcelAggregation
+    parcellation: Schaefer100x7
+    method: mean
+  - name: Schaefer100x7_Std
+    kind: ParcelAggregation
+    parcellation: Schaefer100x7
+    method: std
+storage:
+  kind: HDF5FeatureStorage
+  uri: "/Users/fraimondo/data/NeuroMLCourse/Features/ds003097_GMD/ds003097_GMD.hdf5"
