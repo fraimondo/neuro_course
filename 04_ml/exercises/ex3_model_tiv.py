@@ -11,15 +11,12 @@ storage = HDF5FeatureStorage("./data/ds003097_GMD.hdf5")
 df = storage.read_df("VBM_GM_Schaefer1000x7_Mean")
 # %%
 df_demographics = pd.read_csv("./data/participants.tsv", sep="\t")
-df_demographics["subject"] = df_demographics.participant_id.str.replace(
-    "sub-", ""
-)
+df_demographics.rename(columns={"participant_id": "subject"}, inplace=True)
 # %%
 df_volumne = pd.read_csv(
     "./data/data-subcortical_type-aseg_measure-volume_hemi-both.tsv", sep="\t"
 )
-df_volumne["subject"] = df_volumne["Measure:volume"].str.replace("sub-", "")
-
+df_volumne.rename(columns={"Measure:volume": "subject"}, inplace=True)
 # %%
 X = list(df.columns)
 df_full = df.merge(df_demographics, on="subject")
@@ -51,3 +48,5 @@ to_plot["correct"] = to_plot["repeat0_p0"] == to_plot["target"]
 sns.boxplot(
     data=to_plot, x="sex", hue="correct", y="EstimatedTotalIntraCranialVol"
 )
+
+# %%

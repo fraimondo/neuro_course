@@ -5,7 +5,7 @@ datagrabber:
   uri: https://github.com/OpenNeuroDatasets/ds003097.git
   patterns:
     VBM_GM: 
-        pattern: derivatives/fmriprep/sub-{subject}/anat/sub-{subject}_space-MNI152NLin2009cAsym_label-GM_probseg.nii.gz
+        pattern: derivatives/fmriprep/{subject}/anat/{subject}_space-MNI152NLin2009cAsym_label-GM_probseg.nii.gz
         space: MNI152NLin2009cAsym
   replacements: 
     - subject
