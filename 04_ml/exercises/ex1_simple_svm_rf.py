@@ -32,9 +32,10 @@ scores = run_cross_validation(
     y=y,
     data=df_iris,
     model=creator,
+    cv=cv,
     return_train_score=True,
 )
-
+scores["model"] = "SVM"
 
 # %%
 creator2 = PipelineCreator(problem_type="classification")
@@ -46,9 +47,14 @@ scores2 = run_cross_validation(
     X=X,
     y=y,
     data=df_iris,
+    cv=cv,
     model=creator2,
     return_train_score=True,
 )
+scores2["model"] = "RF"
 # %%
+
 from julearn.viz import plot_scores
 plot_scores(scores, scores2)
+
+# %%

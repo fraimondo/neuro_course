@@ -24,7 +24,9 @@ cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
 # %%
 creator1 = PipelineCreator(problem_type="classification")
 creator1.add("zscore")
-creator1.add("svm", kernel="linear", C=[0.1, 1, 10])
+creator1.add("svm", kernel="linear", C=[0.1, 1, 10, 100])
+
+inner_cv = StratifiedKFold(n_splits=3)
 
 # %%
 scores, model, inspector = run_cross_validation(
@@ -32,8 +34,10 @@ scores, model, inspector = run_cross_validation(
     y=y,
     data=df_iris,
     model=creator1,
+    search_params={"cv": inner_cv},
     return_train_score=True,
     return_inspector=True,
+    cv=cv,
 )
 
 # %%

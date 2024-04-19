@@ -12,23 +12,22 @@ datagrabber:
   types:
     - VBM_GM
 markers:
-  - name: Schaefer1000x7_Mean
+  - name: Shen_2019_368_Mean
     kind: ParcelAggregation
-    parcellation: Schaefer1000x7
+    parcellation: Shen_2019_368
     method: mean
-  - name: Schaefer1000x7_Std
+  - name: Shen_2019_368_Std
     kind: ParcelAggregation
-    parcellation: Schaefer1000x7
+    parcellation: Shen_2019_368
     method: std
-  - name: Schaefer100x7_Mean
+  - name: Shen_2013_50_Mean
     kind: ParcelAggregation
-    parcellation: Schaefer100x7
+    parcellation: Shen_2013_50
     method: mean
-  - name: Schaefer100x7_Std
+  - name: Shen_2013_50_Std
     kind: ParcelAggregation
-    parcellation: Schaefer100x7
+    parcellation: Shen_2013_50
     method: std
 storage:
   kind: HDF5FeatureStorage
   uri: "/Users/fraimondo/data/NeuroMLCourse/Features/ds003097_GMD/ds003097_GMD.hdf5"
-  

@@ -1,0 +1,55 @@
+workdir: /tmp
+
+datagrabber:
+  kind: DataladAOMICID1000
+  types: 
+    - BOLD
+    - BOLD_confounds
+    - BOLD_mask
+preprocess:
+    kind: fMRIPrepConfoundRemover
+    detrend: true
+    standardize: true
+    strategy:
+        motion: full
+        wm_csf: full
+        global_signal: full
+    low_pass: 0.08
+    high_pass: 0.01
+    masks:
+      - inherit
+      - compute_epi_mask
+      - threshold: 0
+markers:
+  - name: parccortical-Schaefer100x17
+    kind: FunctionalConnectivityParcels
+    parcellation: 
+        - Schaefer100x17
+    cor_method: correlation
+    cor_method_params:
+      empirical: true
+    masks:
+      - inherit
+  - name: parccortical-Schaefer200x17
+    kind: FunctionalConnectivityParcels
+    parcellation: 
+        - Schaefer200x17
+    cor_method: correlation
+    cor_method_params:
+      empirical: true
+    masks:
+      - inherit
+  - name: parccortical-Schaefer400x17
+    kind: FunctionalConnectivityParcels
+    parcellation: 
+        - Schaefer400x17
+    cor_method: correlation
+    cor_method_params:
+      empirical: true
+    masks:
+      - inherit
+storage:
+  kind: HDF5FeatureStorage
+  uri: "/Users/fraimondo/data/NeuroMLCourse/Features/ds003097_GMD/ds003097_FC.hdf5"
+  
+

@@ -1,0 +1,55 @@
+workdir: /tmp
+
+datagrabber:
+  kind: DataladAOMICID1000
+  types: 
+    - BOLD
+    - BOLD_confounds
+    - BOLD_mask
+preprocess:
+    kind: fMRIPrepConfoundRemover
+    detrend: true
+    standardize: true
+    strategy:
+        motion: full
+        wm_csf: full
+        global_signal: full
+    low_pass: 0.08
+    high_pass: 0.01
+    masks:
+      - inherit
+      - compute_epi_mask
+      - threshold: 0
+
+markers:
+  - name: ReHo-Power2013-5mm
+    kind: ReHoSpheres
+    coords: "Power2013"
+    radius: 5
+    using: afni
+    masks: 
+      - inherit
+  - name: ReHo-Power2013-10mm
+    kind: ReHoSpheres
+    coords: "Power2013"
+    radius: 10
+    using: afni
+    masks: 
+      - inherit
+
+storage:
+  kind: HDF5FeatureStorage
+  uri: "/Users/fraimondo/data/NeuroMLCourse/Features/ds003097_GMD/ds003097_FC.hdf5"
+queue:
+  jobname: aomic_reho
+  kind: HTCondor
+  env:
+    kind: conda
+    name: neurodc
+  mem: 8G
+  disk: 5G
+  verbose: info
+  pre_run: |
+    source /data/group/appliedml/tools/afni_23.1.10/afni.sh
+    source /data/group/appliedml/tools/ants_2.5.0/ants.sh
+    source /data/group/appliedml/tools/fsl_6.0.4-patched2/fsl.sh
