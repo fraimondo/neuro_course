@@ -236,3 +236,4 @@ scratch/
 nilearn_cache/
 *.gif
 junifer_jobs
+04_ml/exercises/data
