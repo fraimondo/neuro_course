@@ -9,26 +9,6 @@ from sklearn.svm import LinearSVC
 # %%
 storage = HDF5FeatureStorage("./data/ds003097_ReHo.hdf5")
 
-a = [
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "10",
-    "11",
-    "12",
-    "13" "14",
-    "15",
-    "16",
-    "17",
-    "18",
-]
-
 # %%
 df = storage.read_df("BOLD_ReHo-Power2013-10mm")
 df.dropna(inplace=True)
